@@ -30,7 +30,7 @@ if [ -d .repo/local_manifests ] ;then
 else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
-repo sync -c -j 1 --force-sync
+repo sync -c -j 32 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 (cd vendor/foss; git clean -fdx; bash update.sh)
 
@@ -39,7 +39,7 @@ repo sync -c -j 1 --force-sync
 buildVariant() {
 	lunch $1
 	make BUILD_NUMBER=$rom_fp installclean
-	make BUILD_NUMBER=$rom_fp -j8 systemimage
+	make BUILD_NUMBER=$rom_fp -j32 systemimage
 	make BUILD_NUMBER=$rom_fp vndk-test-sepolicy
 	xz -c $OUT/system.img > release/$rom_fp/system-${2}.img.xz
 }
@@ -52,12 +52,12 @@ buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 [ "$1" != "android-9.0" ] && buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
 [ "$1" != "android-9.0" ] && buildVariant treble_arm64_afS-userdebug arm64-aonly-floss-su
 
-buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
-[ "$1" != "android-9.0" ] && buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
-[ "$1" != "android-9.0" ] && buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
+# buildVariant treble_arm64_bvN-userdebug arm64-ab-vanilla-nosu
+# [ "$1" != "android-9.0" ] && buildVariant treble_arm64_bgS-userdebug arm64-ab-gapps-su
+# [ "$1" != "android-9.0" ] && buildVariant treble_arm64_bfS-userdebug arm64-ab-floss-su
 
-buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
-[ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
+# buildVariant treble_arm_avN-userdebug arm-aonly-vanilla-nosu
+# [ "$1" != "android-9.0" ] && buildVariant treble_arm_aoS-userdebug arm-aonly-go-su
 
 if [ "$release" == true ];then
     (
