@@ -30,7 +30,7 @@ if [ -d .repo/local_manifests ] ;then
 else
 	git clone https://github.com/phhusson/treble_manifest .repo/local_manifests -b $phh
 fi
-repo sync -c -j 32 --force-sync
+repo sync -c -j 1 --force-sync
 (cd device/phh/treble; git clean -fdx; bash generate.sh)
 (cd vendor/foss; git clean -fdx; bash update.sh)
 
