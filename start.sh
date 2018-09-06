@@ -1,1 +1,2 @@
-nohup ./build.sh android-9.0 &
+BASEDIR=$(dirname "$0")
+nohup bash "$BASEDIR/build.sh" 'android-9.0' &
