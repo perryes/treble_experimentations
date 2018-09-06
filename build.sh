@@ -49,9 +49,10 @@ bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches.zip
 
 if [ "$1" == "android-9.0" ];then
-buildVariant treble_arm64_avS-userdebug arm64-aonly-vanilla-su
-buildVariant treble_arm64_bvS-userdebug arm64-ab-vanilla-su
-buildVariant treble_arm_avS-userdebug arm-aonly-vanilla-su
+buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
+#buildVariant treble_arm64_avS-userdebug arm64-aonly-vanilla-su
+#buildVariant treble_arm64_bvS-userdebug arm64-ab-vanilla-su
+#buildVariant treble_arm_avS-userdebug arm-aonly-vanilla-su
 else
 buildVariant treble_arm64_avN-userdebug arm64-aonly-vanilla-nosu
 buildVariant treble_arm64_agS-userdebug arm64-aonly-gapps-su
