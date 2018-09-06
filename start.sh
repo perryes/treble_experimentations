@@ -1,1 +1,1 @@
-nohub ./build.sh android-9.0 &
+nohup ./build.sh android-9.0 &
